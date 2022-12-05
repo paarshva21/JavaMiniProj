@@ -1,6 +1,8 @@
 import java.util.*;
 import javax.swing.*;
+import javax.swing.Timer;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
@@ -11,8 +13,6 @@ class ClockDisplay extends JFrame implements ActionListener {
     JTextField t1;
     JButton b1, b2, b3;
     JLabel l1;
-    SimpleDateFormat timeFormat=new SimpleDateFormat();
-    Calendar calendar=Calendar.getInstance();
 
     ClockDisplay() {
         c = getContentPane();
@@ -24,8 +24,19 @@ class ClockDisplay extends JFrame implements ActionListener {
         b1.addActionListener(this);
     }
 
+    public void startClock() {
+        Timer timer = new Timer(1000, new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                Date date = new Date();
+                l1.setText(formatter.format(date));
+            }
+        });
+        timer.start();
+    }
+
     public void actionPerformed(ActionEvent ae) {
-        l1.setText(""+calendar.getTime());
+        startClock();
     }
 }
 
