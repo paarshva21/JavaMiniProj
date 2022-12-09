@@ -12,6 +12,7 @@ class ClockDisplay extends JFrame implements ActionListener {
     JTextField t1;
     JButton b1, b2;
     JLabel l1, l2;
+    Timer timer;
 
     ClockDisplay() {
         c = getContentPane();
@@ -41,17 +42,17 @@ class ClockDisplay extends JFrame implements ActionListener {
         timer.start();
     }
 
-    public void startTimer(int time) {
-        Timer timer = new Timer(1000, new ActionListener() {
+    public void startTimer(int time,int delay) {
+        timer = new Timer(delay, new ActionListener() {
             int s = time;
 
             public void actionPerformed(ActionEvent ae) {
-                s--;
                 l2.setText(Integer.toString(s));
+                s--;
                 if (s <= 0) {
                     l2.setText("Timer completed");
+                    timer.stop();
                 }
-
             }
         });
 
@@ -63,7 +64,7 @@ class ClockDisplay extends JFrame implements ActionListener {
             startClock();
         if (ae.getSource() == b2) {
             int time = Integer.parseInt(t1.getText());
-            startTimer(time);
+            startTimer(time,1000);
         }
 
     }
