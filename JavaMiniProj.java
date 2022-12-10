@@ -16,7 +16,7 @@ class ClockDisplay extends JFrame implements ActionListener {
     JTextField t1;
     JButton b1, b2, b3, b4, b5, b6;
     JLabel l1, l2, l3;
-    Timer timer;
+    Timer timer1,timer;
     int flag = 1, flag2 = 1;
     
     ClockDisplay() {
@@ -89,7 +89,7 @@ class ClockDisplay extends JFrame implements ActionListener {
     }
 
     public void startTimer(int time, int delay) {
-        timer = new Timer(delay, new ActionListener() {
+        timer1 = new Timer(delay, new ActionListener() {
             int s = time;
 
             public void actionPerformed(ActionEvent ae) {
@@ -100,14 +100,14 @@ class ClockDisplay extends JFrame implements ActionListener {
                     java.awt.Toolkit.getDefaultToolkit().beep();
                     java.awt.Toolkit.getDefaultToolkit().beep();
                     java.awt.Toolkit.getDefaultToolkit().beep();
-                    timer.stop();
+                    timer1.stop();
                     flag = 1;
                 }
                 s--;
             }
         });
 
-        timer.start();
+        timer1.start();
     }
 
     public void startStopwatch(int time, int delay) {
@@ -161,7 +161,7 @@ public class JavaMiniProj {
         ClockDisplay cd = new ClockDisplay();
         JFrame.setDefaultLookAndFeelDecorated(true);
         cd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        cd.setBounds(200, 200, 400,500);
+        cd.setBounds(200, 200, 400,550);
         cd.setVisible(true);
         cd.setTitle("Clock Application");
     }
